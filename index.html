@@ -11,7 +11,7 @@
 </head>
 
 <body style="text-align: center; padding: 0; border: 0; margin: 0;">
-    <canvas id="unity-canvas" tabindex="0"
+    <canvas id="unity-canvas" tabindex="-1"
         style="width: 100vw; height: 100vh; background: #231F20"></canvas>
     <script src="Build/Build.loader.js"></script>
     <script>
@@ -41,9 +41,9 @@
         // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
         // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
       }).then((unityInstance) => {
-        console.log('Instance created',window.Telegram.WebApp);
+        console.log('Instance created', window.Telegram.WebApp);
                 window.unityInstance = unityInstance;
-                window.unityInstance.SendMessage("TelegramController", "SetWebAppUser", JSON.stringify(window.Telegram.WebApp.initDataUnsafe.user));
+                window.unityInstance.SendMessage("TelegramManager", "SetWebAppUser", JSON.stringify(window.Telegram.WebApp.initDataUnsafe.user));
             });
     </script>
 
@@ -51,9 +51,11 @@
     if(window.Telegram.WebApp){
         window.Telegram.WebApp.onEvent('qrTextReceived',async (obj)=>{
             console.log('#qrTextReceived',obj)
+            /*
             if( window.unityInstance){
                 window.unityInstance.SendMessage("TelegramController", "OnQrDetected", obj.data);
             }
+            */
         })
     }
     </script>
